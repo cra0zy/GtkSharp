@@ -6,7 +6,7 @@
 // VARS
 
 Settings.Cake = Context;
-Settings.Version = "3.22.24.29";
+Settings.Version = "3.22.24.30";
 Settings.BuildTarget = Argument("BuildTarget", "Default");
 Settings.Assembly = Argument("Assembly", "");
 
@@ -18,6 +18,9 @@ var list = new List<GAssembly>();
 Task("Init")
     .Does(() =>
 {
+	var version = System.Environment.GetEnvironmentVariable("TRAVIS_TAG");
+	Information("Version detected: " + version);
+	
     // Assign some common properties
     msbuildsettings = msbuildsettings.WithProperty("Version", Settings.Version);
     msbuildsettings = msbuildsettings.WithProperty("Authors", "'GtkSharp Contributors'");
